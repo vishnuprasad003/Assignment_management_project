@@ -1,0 +1,36 @@
+{% extends "student/Student_Basepage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">Teacher name</th>
+      <th scope="col">assignment number</th>
+      <th scope="col">assignment_description</th>
+      <th scope="col">assignment_file</th>
+      <th scope="col">assignment_due_date</th>
+
+
+
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for data1 in pending_assignments %}
+    <tr>
+      <td>{{data1.teacher}}</td>
+      <td>{{data1.assignment_title}}</td>
+      <td>{{data1.assignment_description}}</td>
+      <td>{{data1.assignment_file}}</td>
+      <td>{{data1.assignment_due_date}}</td>
+
+
+
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "teacher/Teacher_Basepage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h3>Submissions for {{ department.Department_name }}</h3>
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">Student name</th>
+      <th scope="col">Assignment name</th>
+      <th scope="col">Submitted date</th>
+      <th scope="col">File</th>
+      <th scope="col">Text</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for data1 in submission %}
+    <tr>
+<!--      <th scope="row"></th>-->
+<!--      <td>-->
+<!--&lt;!&ndash;        <img src="#" class="rounded-circle" width="100" height="100" alt="Teacher_image">&ndash;&gt;-->
+<!--      </td>-->
+      <td>{{data1.student}}</td>
+      <td>{{data1.assignment}}</td>
+      <td>{{data1.submit_date}}</td>
+      <td>{{data1.submit_file}}</td>
+      <td>{{data1.text}}</td>
+
+<!--      <td><a href="#"><button class="btn btn-warning">View submitted assignment</button></a></td>-->
+
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

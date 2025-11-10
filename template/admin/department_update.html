@@ -1,0 +1,12 @@
+{% extends "admin/admin_Basepage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form method="POST" >
+    {% csrf_token %}
+    {{update|crispy}}
+    <button type="reset" class="btn btn-light">Clear</button>
+    <button type="submit" class="btn btn-light">Save</button>
+</form>
+
+{% endblock %}

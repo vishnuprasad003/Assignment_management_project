@@ -1,0 +1,10 @@
+{%extends "teacher/Teacher_Basepage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    {{data|crispy}}
+    <button type="reset" class="btn btn-light">Clear</button>
+    <button type="submit" class="btn btn-light">Save</button>
+</form>
+{% endblock %}

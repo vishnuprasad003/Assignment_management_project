@@ -1,0 +1,42 @@
+{% extends "student/Student_Basepage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% for message in messages %}
+<div class="alert alert-primary alert-dismissible fade show" role="alert" id="popupMessage">
+  {{ message }}
+</div>
+{% endfor %}
+
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">student name</th>
+      <th scope="col">assignment number</th>
+      <th scope="col">submit_file</th>
+      <th scope="col">submit_date</th>
+      <th scope="col">text</th>
+
+      <th scope="col">update</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for data1 in data %}
+    <tr>
+      <td>{{data1.student}}</td>
+      <td>{{data1.assignment}}</td>
+      <td>{{data1.submit_file}}</td>
+      <td>{{data1.submit_date}}</td>
+      <td>{{data1.text}}</td>
+         <td><a href="{% url 'updatesubmitassignment' data1.id %}"><button class="btn btn-warning">update</button></a></td>
+
+
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

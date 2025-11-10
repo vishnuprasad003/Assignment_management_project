@@ -1,0 +1,39 @@
+{% extends "teacher/Teacher_Basepage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">assignment_title</th>
+      <th scope="col">assignment_description</th>
+<!--      <th scope="col">assignment_file</th>-->
+      <th scope="col">assignment_due_date</th>
+      <th scope="col">created_at</th>
+      <th scope="col">teacher</th>
+      <th scope="col">department</th>
+      <th scope="col">update</th>
+      <th scope="col">delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for data1 in data %}
+    <tr>
+      <td>{{data1.assignment_title}}</td>
+      <td>{{data1.assignment_description}}</td>
+<!--      <td>{{data1.assignment_file}}</td>-->
+      <td>{{data1.assignment_due_date}}</td>
+      <td>{{data1.created_at}}</td>
+      <td>{{data1.teacher}}</td>
+      <td>{{data1.department}}</td>
+
+      <td><a href="{% url 'updateassignment' data1.id %}"><button class="btn btn-warning">update</button></a></td>
+      <td><a href="{% url 'deleteassignment' data1.id %}"><button class="btn btn-warning">delete</button></a></td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

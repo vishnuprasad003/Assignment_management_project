@@ -1,0 +1,48 @@
+{% extends "student/Student_Basepage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!--{% for message in messages %}-->
+<!--<div class="alert alert-primary alert-dismissible fade show" role="alert" id="popupMessage">-->
+<!--  {{ message }}-->
+<!--</div>-->
+<!--{% endfor %}-->
+
+<table class="table" >
+  <thead>
+    <tr>
+      <th scope="col">assignment_title</th>
+      <th scope="col">teacher</th>
+      <th scope="col">assignment_description</th>
+      <th scope="col">assignment_file</th>
+      <th scope="col">assignment_due_date</th>
+      <th scope="col">created_at</th>
+
+      <th scope="col">department</th>
+      <th scope="col">Submit</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+  {% for data1 in assignments %}
+    <tr>
+      <td>{{data1.assignment_title}}</td>
+      <td>{{teacher.Teacher_name}}</td>
+      <td>{{data1.assignment_description}}</td>
+      <td>{{data1.assignment_file}}</td>
+      <td>{{data1.assignment_due_date}}</td>
+      <td>{{data1.created_at}}</td>
+
+      <td>{{data1.department}}</td>
+      {% if today < data1.assignment_due_date %}
+         <td><a href="{% url 'submitassignment' data1.id %}"><button class="btn btn-warning">submit</button></a></td>
+      {% else %}
+          <td><span class="text-danger">Due date is passed </span></td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
