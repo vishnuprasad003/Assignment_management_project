@@ -27,7 +27,7 @@
     <tr>
       <td>{{data1.student}}</td>
       <td>{{data1.assignment}}</td>
-      <td>{{data1.submit_file}}</td>
+      <td><a href="{{data1.submit_file.url}}">view file</a> </td>
       <td>{{data1.submit_date}}</td>
       <td>{{data1.text}}</td>
          <td><a href="{% url 'updatesubmitassignment' data1.id %}"><button class="btn btn-warning">update</button></a></td>
