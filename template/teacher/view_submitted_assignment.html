@@ -1,13 +1,26 @@
 {% extends "teacher/Teacher_Basepage.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+
 <h3>Submissions for {{ department.Department_name }}</h3>
+
+<div class="d-flex justify-content-center">
+<form method="get" class="form-inline  search-form" style="float:right;">
+                    <div class="md-form my-0 d-flex justify-content-center">
+
+                        {{submission_filter.form}}
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </div>
+                </form>
+  </div>
+
 <table class="table" >
   <thead>
     <tr>
-      <th scope="col">Student name</th>
-      <th scope="col">Assignment name</th>
-      <th scope="col">Submitted date</th>
+      <th scope="col">Student Name</th>
+      <th scope="col">Assignment Name</th>
+      <th scope="col">Submitted Date</th>
       <th scope="col">File</th>
       <th scope="col">Text</th>
       <th scope="col"></th>

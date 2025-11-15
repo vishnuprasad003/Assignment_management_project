@@ -1,17 +1,27 @@
 {% extends "admin/admin_Basepage.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<div class="d-flex justify-content-center">
+<form method="get" class="form-inline  search-form" style="float:right;">
+                    <div class="md-form my-0 d-flex justify-content-center">
+
+                        {{student_filter.form}}
+
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </div>
+                </form>
+  </div>
 
 <table class="table" >
   <thead>
     <tr>
-      <th scope="col">Student_image</th>
-      <th scope="col">Student_name</th>
-      <th scope="col">Student_Email</th>
-      <th scope="col">Student_Phone_number</th>
-      <th scope="col">Student_department</th>
-      <th scope="col">UPDATE</th>
-      <th scope="col">DELETE</th>
+      <th scope="col">Student Profile</th>
+      <th scope="col">Student Name</th>
+      <th scope="col">Student Email</th>
+      <th scope="col">Student Phone number</th>
+      <th scope="col">Student department</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>

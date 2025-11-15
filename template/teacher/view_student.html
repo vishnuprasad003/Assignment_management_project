@@ -2,14 +2,24 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<div class="d-flex justify-content-center">
+<form method="get" class="form-inline  search-form" style="float:right;">
+                    <div class="md-form my-0 d-flex justify-content-center">
+
+                        {{department_filter.form}}
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </div>
+                </form>
+  </div>
+
 <table class="table" >
   <thead>
     <tr>
       <th scope="col"></th>
       <th scope="col"></th>
-      <th scope="col">Department_name</th>
-      <th scope="col">Department_Email</th>
-      <th scope="col">Department_Phone_Number</th>
+      <th scope="col">Department Name</th>
+      <th scope="col">Department Email</th>
+      <th scope="col">Department Phone Number</th>
       <th scope="col"></th>
 
     </tr>

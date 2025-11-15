@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from Assignment_management_project_app.filters import assignmentFilter, departmentFilter, studentFilter, StudentFilter, \
+    SubmittedFilter
 from Assignment_management_project_app.foms import teacher_form, assignment_form
 from Assignment_management_project_app.models import Teacher, Department, Student, Assignment, Submission
 
@@ -22,11 +24,23 @@ def profile_edit(request,id):
 @login_required(login_url="Loginview")
 def department_student(request):
     data=Department.objects.all()
-    return render(request,"teacher/view_student.html",{"data":data})
+    department_filter=departmentFilter(request.GET,queryset=data)
+    data1=department_filter.qs
+    context={
+        "data":data1,
+        "department_filter":department_filter
+    }
+    return render(request,"teacher/view_student.html",context)
 @login_required(login_url="Loginview")
 def filter_student(request,id):
     data=Student.objects.filter(Student_department=id)
-    return render(request,"teacher/view_filter_student.html",{"data":data})
+    student_filter=StudentFilter(request.GET,queryset=data)
+    data1=student_filter.qs
+    context={
+        "data":data1,
+        "student_filter":student_filter
+    }
+    return render(request,"teacher/view_filter_student.html",context)
 @login_required(login_url="Loginview")
 def add_assignment(request):
     teacher=Teacher.objects.get(user=request.user)
@@ -46,8 +60,13 @@ def view_assignment(request):
     user_data=request.user
     data=Teacher.objects.get(user=user_data)
     filterData=Assignment.objects.filter(teacher=data)
-    # data=Assignment.objects.all()
-    return render(request,"teacher/view_assignment.html",{"data":filterData})
+    assignment_filter=assignmentFilter(request.GET,queryset=filterData)
+    data1=assignment_filter.qs
+    context={
+        "data":data1,
+        "assignment_filter":assignment_filter
+    }
+    return render(request,"teacher/view_assignment.html",context)
 @login_required(login_url="Loginview")
 def update_assignment(request,id):
     data=Assignment.objects.get(id=id)
@@ -73,7 +92,17 @@ def view_submitted_assignment(request,id):
     for assignment in assignments:
         data=Submission.objects.filter(assignment=assignment)
         submission.extend(data)
-    return render(request,"teacher/view_submitted_assignment.html",{"submission":submission,"department":department})
+    submission_ids = [s.id for s in submission]
+    submission_qs = Submission.objects.filter(id__in=submission_ids)
+
+    submission_filter = SubmittedFilter(request.GET, queryset=submission_qs)
+    filtered_submission = submission_filter.qs
+    context={
+        "submission":filtered_submission,
+        "department": department,
+        "submission_filter":submission_filter
+    }
+    return render(request,"teacher/view_submitted_assignment.html",context)
 
 
 

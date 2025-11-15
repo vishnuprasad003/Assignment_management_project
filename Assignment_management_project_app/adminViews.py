@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from Assignment_management_project_app.filters import departmentFilter, studentFilter, teacherFilter
 from Assignment_management_project_app.foms import Department_form, teacher_form, student_form
-from Assignment_management_project_app.models import Department, Teacher, Student
+from Assignment_management_project_app.models import Department, Teacher, Student, Assignment, Submission
+
 
 @login_required(login_url="Loginview")
 def department(request):
@@ -15,8 +17,14 @@ def department(request):
 @login_required(login_url="Loginview")
 def departmentview(request):
     data=Department.objects.all()
+    department_filter=departmentFilter(request.GET,queryset=data)
+    data1=department_filter.qs
+    context={
+            "data":data1,
+            "department_filter":department_filter
+    }
 
-    return render(request,"admin/department_view.html",{"data":data})
+    return render(request,"admin/department_view.html",context)
 @login_required(login_url="Loginview")
 def department_update(request,id):
     data=Department.objects.get(id=id)
@@ -36,7 +44,13 @@ def department_delete(request,id):
 @login_required(login_url="Loginview")
 def teacher_view(request):
     data=Teacher.objects.all()
-    return render(request,"admin/teacher_view.html",{"data":data})
+    teacher_filter=teacherFilter(request.GET,queryset=data)
+    data1=teacher_filter.qs
+    context={
+        "data":data1,
+        "teacher_filter":teacher_filter
+    }
+    return render(request,"admin/teacher_view.html",context)
 @login_required(login_url="Loginview")
 def teacher_update(request,id):
     data=Teacher.objects.get(id=id)
@@ -56,7 +70,13 @@ def teacher_delete(request,id):
 @login_required(login_url="Loginview")
 def student_view(request):
     data=Student.objects.all()
-    return render(request,"admin/student_view.html",{"data":data})
+    student_filter=studentFilter(request.GET,queryset=data)
+    data1=student_filter.qs
+    context={
+        "data":data1,
+        "student_filter":student_filter
+    }
+    return render(request,"admin/student_view.html",context)
 @login_required(login_url="Loginview")
 def student_update(request,id):
     data=Student.objects.get(id=id)
@@ -72,3 +92,5 @@ def student_delete(request,id):
     data=Student.objects.get(id=id)
     data.delete()
     return redirect("studentview")
+
+
